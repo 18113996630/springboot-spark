@@ -1,6 +1,7 @@
 # springboot-spark
 使用springboot构建rest api远程提交spark任务，博客地址：https://blog.csdn.net/hlp4207/article/details/100831384
-使用方法：
+
+**使用方法：**
 1. 前台调用Restful接口，传入spark任务所需参数
 2. 后台接收到参数，使用SparkLauncher构建远程提交spark任务对象
 ```
