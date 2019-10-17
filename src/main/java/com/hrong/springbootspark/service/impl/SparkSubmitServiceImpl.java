@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
@@ -48,7 +49,7 @@ public class SparkSubmitServiceImpl implements ISparkSubmitService {
 			}
 		}
 		if (otherParams.length != 0) {
-			log.info("开始设置spark job参数:{}", otherParams);
+			log.info("开始设置spark job参数:{}", Arrays.toString(otherParams));
 			launcher.addAppArgs(otherParams);
 		}
 		log.info("参数设置完成，开始提交spark任务");
@@ -74,10 +75,11 @@ public class SparkSubmitServiceImpl implements ISparkSubmitService {
 		String restUrl;
 		try {
 			restUrl = "http://"+driverName+":18080/api/v1/applications/" + handle.getAppId();
+			log.info("访问application运算结果，url:{}", restUrl);
+			return HttpUtil.httpGet(restUrl, null);
 		} catch (Exception e) {
-			log.info("18080端口异常，尝试4040端口");
-			restUrl = "http://"+driverName+":4040/api/v1/applications/" + handle.getAppId();
+			log.info("18080端口异常，请确保spark-history-server服务已开启");
+			return "{\"state\":\"error\",\"data\":\"history server is not start\"}";
 		}
-		return HttpUtil.httpGet(restUrl, null);
 	}
 }
