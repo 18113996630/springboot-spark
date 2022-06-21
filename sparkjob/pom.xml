@@ -15,7 +15,7 @@
         <spark.version>2.3.3</spark.version>
         <scala.version>2.11</scala.version>
         <scala-library.version>2.11.8</scala-library.version>
-        <mysql.version>8.0.16</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <oracle.version>11g</oracle.version>
         <codehaus.version>3.0.10</codehaus.version>
     </properties>
